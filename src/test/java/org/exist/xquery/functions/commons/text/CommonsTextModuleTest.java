@@ -1,4 +1,4 @@
-package org.exist;
+package org.exist.xquery.functions.commons.text;
 
 
 import org.exist.EXistException;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class ExampleModuleTest {
+public class CommonsTextModuleTest {
 
     @ClassRule
     public static ExistEmbeddedServer existEmbeddedServer = new ExistEmbeddedServer(false, true);
@@ -32,7 +32,7 @@ public class ExampleModuleTest {
     @Test
     public void helloWorld() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://my-organisation.com/exist-db/ns/app/my-java-module\";\n" +
+                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
                         "myjmod:hello-world()";
         final Sequence result = executeQuery(query);
 
@@ -52,7 +52,7 @@ public class ExampleModuleTest {
     @Test
     public void sayHello() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://my-organisation.com/exist-db/ns/app/my-java-module\";\n" +
+                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
                         "myjmod:say-hello('Adam')";
         final Sequence result = executeQuery(query);
 
@@ -72,7 +72,7 @@ public class ExampleModuleTest {
     @Test
     public void sayHello_noName() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://my-organisation.com/exist-db/ns/app/my-java-module\";\n" +
+                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
                         "myjmod:say-hello(())";
         final Sequence result = executeQuery(query);
 
@@ -92,7 +92,7 @@ public class ExampleModuleTest {
     @Test
     public void add() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://my-organisation.com/exist-db/ns/app/my-java-module\";\n" +
+                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
                         "myjmod:add(123, 456)";
         final Sequence result = executeQuery(query);
 

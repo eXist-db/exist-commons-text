@@ -1,4 +1,4 @@
-package org.exist;
+package org.exist.xquery.functions.commons.text;
 
 import org.exist.dom.QName;
 import org.exist.dom.memtree.DocumentImpl;
@@ -15,13 +15,13 @@ import org.exist.xquery.value.Type;
 import java.util.Optional;
 
 import static org.exist.xquery.FunctionDSL.*;
-import static org.exist.ExampleModule.functionSignature;
+import static org.exist.xquery.functions.commons.text.CommonsTextModule.functionSignature;
 
 /**
  * Some very simple XQuery example functions implemented
  * in Java.
  */
-public class ExampleFunctions extends BasicFunction {
+public class CommonsTextFunctions extends BasicFunction {
 
     private static final String FS_HELLO_WORLD_NAME = "hello-world";
     static final FunctionSignature FS_HELLO_WORLD = functionSignature(
@@ -48,7 +48,7 @@ public class ExampleFunctions extends BasicFunction {
             param("b", Type.INT, "A number")
     );
 
-    public ExampleFunctions(final XQueryContext context, final FunctionSignature signature) {
+    public CommonsTextFunctions(final XQueryContext context, final FunctionSignature signature) {
         super(context, signature);
     }
 
