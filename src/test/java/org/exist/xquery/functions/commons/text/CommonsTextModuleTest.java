@@ -32,8 +32,8 @@ public class CommonsTextModuleTest {
     @Test
     public void helloWorld() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "myjmod:hello-world()";
+                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
+                        "text:hello-world()";
         final Sequence result = executeQuery(query);
 
         assertTrue(result.hasOne());
@@ -52,8 +52,8 @@ public class CommonsTextModuleTest {
     @Test
     public void sayHello() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "myjmod:say-hello('Adam')";
+                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
+                        "text:say-hello('Adam')";
         final Sequence result = executeQuery(query);
 
         assertTrue(result.hasOne());
@@ -72,8 +72,8 @@ public class CommonsTextModuleTest {
     @Test
     public void sayHello_noName() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "myjmod:say-hello(())";
+                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
+                        "text:say-hello(())";
         final Sequence result = executeQuery(query);
 
         assertTrue(result.hasOne());
@@ -92,8 +92,8 @@ public class CommonsTextModuleTest {
     @Test
     public void add() throws XPathException, PermissionDeniedException, EXistException {
         final String query =
-                "declare namespace myjmod = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "myjmod:add(123, 456)";
+                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
+                        "text:add(123, 456)";
         final Sequence result = executeQuery(query);
 
         assertTrue(result.hasOne());

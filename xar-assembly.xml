@@ -8,8 +8,7 @@
     <copyright>true</copyright>
 
     <!-- should be either "application" or "library" -->
-    <type>application</type>
-    <!-- type>library</type -->
+    <type>library</type>
 
     <status>stable</status>
 

@@ -1,5 +1,6 @@
 package org.exist.xquery.functions.commons.text;
 
+import org.apache.commons.text.similarity.CosineSimilarity;
 import org.exist.dom.QName;
 import org.exist.dom.memtree.DocumentImpl;
 import org.exist.dom.memtree.MemTreeBuilder;
@@ -7,12 +8,14 @@ import org.exist.xquery.BasicFunction;
 import org.exist.xquery.FunctionSignature;
 import org.exist.xquery.XPathException;
 import org.exist.xquery.XQueryContext;
-import org.exist.xquery.value.IntegerValue;
-import org.exist.xquery.value.Sequence;
-import org.exist.xquery.value.StringValue;
-import org.exist.xquery.value.Type;
+import org.exist.xquery.functions.map.MapType;
+import org.exist.xquery.value.*;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.exist.xquery.FunctionDSL.*;
 import static org.exist.xquery.functions.commons.text.CommonsTextModule.functionSignature;
@@ -48,6 +51,16 @@ public class CommonsTextFunctions extends BasicFunction {
             param("b", Type.INT, "A number")
     );
 
+    private static final String COSINE_SIMILARITY = "cosine-similarity";
+    static final FunctionSignature FS_COSINE_SIMILARITY = functionSignature(
+            COSINE_SIMILARITY,
+            "Measures the cosine similarity between two strings.",
+            returns(Type.DOUBLE),
+            param("left", Type.STRING, "Left"),
+            param("right", Type.STRING, "Right"),
+            optParam("delimiter", Type.STRING, "The optional text delimiter.  The default is a space.")
+    );
+
     public CommonsTextFunctions(final XQueryContext context, final FunctionSignature signature) {
         super(context, signature);
     }
@@ -67,6 +80,27 @@ public class CommonsTextFunctions extends BasicFunction {
                 final IntegerValue a = (IntegerValue) args[0].itemAt(0);
                 final IntegerValue b = (IntegerValue) args[1].itemAt(0);
                 return add(a, b);
+
+            case COSINE_SIMILARITY:
+                final CosineSimilarity cs = new CosineSimilarity();
+
+                final StringValue leftValue = (StringValue) args[0].itemAt(0);
+                final StringValue rightValue = (StringValue) args[1].itemAt(0);
+                String textDelimiter = " ";
+
+                if (args.length > 2) {
+                    textDelimiter = args[2].itemAt(0).getStringValue();
+                }
+
+                Map<CharSequence, Integer> leftVector =
+                        Arrays.stream(leftValue.getStringValue().split(textDelimiter))
+                                .collect(Collectors.toMap(c -> c, c -> 1, Integer::sum));
+                Map<CharSequence, Integer> rightVector =
+                        Arrays.stream(rightValue.getStringValue().split(textDelimiter))
+                                .collect(Collectors.toMap(c -> c, c -> 1, Integer::sum));
+
+
+                return new DoubleValue(cs.cosineSimilarity(leftVector, rightVector));
 
             default:
                 throw new XPathException(this, "No function: " + getName() + "#" + getSignature().getArgumentCount());

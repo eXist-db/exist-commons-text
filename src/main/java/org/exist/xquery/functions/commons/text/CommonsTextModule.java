@@ -17,15 +17,16 @@ import static org.exist.xquery.FunctionDSL.functionDefs;
 public class CommonsTextModule extends AbstractInternalModule {
 
     public static final String NAMESPACE_URI = "https://exist-db.org/commons-text/lib";
-    public static final String PREFIX = "myjmod";
-    public static final String RELEASED_IN_VERSION = "eXist-3.6.0";
+    public static final String PREFIX = "text";
+    public static final String RELEASED_IN_VERSION = "eXist-5.2.0";
 
     // register the functions of the module
     public static final FunctionDef[] functions = functionDefs(
         FunctionDSL.functionDefs(CommonsTextFunctions.class,
                 CommonsTextFunctions.FS_HELLO_WORLD,
                 CommonsTextFunctions.FS_SAY_HELLO,
-                CommonsTextFunctions.FS_ADD
+                CommonsTextFunctions.FS_ADD,
+                CommonsTextFunctions.FS_COSINE_SIMILARITY
         )
     );
 
