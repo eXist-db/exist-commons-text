@@ -8,16 +8,10 @@ import org.exist.storage.DBBroker;
 import org.exist.test.ExistEmbeddedServer;
 import org.exist.xquery.XPathException;
 import org.exist.xquery.XQuery;
-import org.exist.xquery.value.IntegerValue;
 import org.exist.xquery.value.Sequence;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.builder.Input;
-import org.xmlunit.diff.Diff;
 
-import javax.xml.transform.Source;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -28,79 +22,6 @@ public class CommonsTextModuleTest {
 
     @ClassRule
     public static ExistEmbeddedServer existEmbeddedServer = new ExistEmbeddedServer(false, true);
-
-    @Test
-    public void helloWorld() throws XPathException, PermissionDeniedException, EXistException {
-        final String query =
-                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "text:hello-world()";
-        final Sequence result = executeQuery(query);
-
-        assertTrue(result.hasOne());
-
-        final Source inExpected = Input.fromString("<hello>World</hello>").build();
-        final Source inActual = Input.fromDocument((Document) result.itemAt(0)).build();
-
-        final Diff diff = DiffBuilder.compare(inExpected)
-                .withTest(inActual)
-                .checkForSimilar()
-                .build();
-
-        assertFalse(diff.toString(), diff.hasDifferences());
-    }
-
-    @Test
-    public void sayHello() throws XPathException, PermissionDeniedException, EXistException {
-        final String query =
-                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "text:say-hello('Adam')";
-        final Sequence result = executeQuery(query);
-
-        assertTrue(result.hasOne());
-
-        final Source inExpected = Input.fromString("<hello>Adam</hello>").build();
-        final Source inActual = Input.fromDocument((Document) result.itemAt(0)).build();
-
-        final Diff diff = DiffBuilder.compare(inExpected)
-                .withTest(inActual)
-                .checkForSimilar()
-                .build();
-
-        assertFalse(diff.toString(), diff.hasDifferences());
-    }
-
-    @Test
-    public void sayHello_noName() throws XPathException, PermissionDeniedException, EXistException {
-        final String query =
-                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "text:say-hello(())";
-        final Sequence result = executeQuery(query);
-
-        assertTrue(result.hasOne());
-
-        final Source inExpected = Input.fromString("<hello>stranger</hello>").build();
-        final Source inActual = Input.fromDocument((Document) result.itemAt(0)).build();
-
-        final Diff diff = DiffBuilder.compare(inExpected)
-                .withTest(inActual)
-                .checkForSimilar()
-                .build();
-
-        assertFalse(diff.toString(), diff.hasDifferences());
-    }
-
-    @Test
-    public void add() throws XPathException, PermissionDeniedException, EXistException {
-        final String query =
-                "declare namespace text = \"https://exist-db.org/commons-text/lib\";\n" +
-                        "text:add(123, 456)";
-        final Sequence result = executeQuery(query);
-
-        assertTrue(result.hasOne());
-
-        assertEquals(579, ((IntegerValue)result.itemAt(0)).getInt());
-    }
-
 
     private Sequence executeQuery(final String xquery) throws EXistException, PermissionDeniedException, XPathException {
         final BrokerPool pool = existEmbeddedServer.getBrokerPool();

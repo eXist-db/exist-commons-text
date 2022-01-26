@@ -23,9 +23,6 @@ public class CommonsTextModule extends AbstractInternalModule {
     // register the functions of the module
     public static final FunctionDef[] functions = functionDefs(
         FunctionDSL.functionDefs(CommonsTextFunctions.class,
-                CommonsTextFunctions.FS_HELLO_WORLD,
-                CommonsTextFunctions.FS_SAY_HELLO,
-                CommonsTextFunctions.FS_ADD,
                 CommonsTextFunctions.FS_COSINE_SIMILARITY
         )
     );
@@ -46,7 +43,7 @@ public class CommonsTextModule extends AbstractInternalModule {
 
     @Override
     public String getDescription() {
-        return "Example Module for eXist-db XQuery";
+        return "This is a library function module for eXist-db that wraps the specifically finding the similarities and distances between strings.";
     }
 
     @Override
