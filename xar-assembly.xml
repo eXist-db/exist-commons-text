@@ -49,6 +49,12 @@
             <artifactId>${project.artifactId}</artifactId>
             <version>${project.version}</version>
         </dependencySet>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+        <dependencySet>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons.text.version}</version>
+        </dependencySet>
     </dependencySets>
 
     <!-- register the Java module to eXist-db -->

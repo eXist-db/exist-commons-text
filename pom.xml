@@ -13,7 +13,7 @@
 
     <groupId>org.exist-db</groupId>
     <artifactId>commons-text-functions</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <name>Apache Commons Text Functions</name>
     <description>This is a library function module for eXist-db that wraps the specifically finding the similarities and distances between strings</description>
@@ -48,7 +48,8 @@
         <project.build.source>1.8</project.build.source>
         <project.build.target>1.8</project.build.target>
 
-        <exist.version>5.0.0</exist.version>
+        <exist.version>6.0.0</exist.version>
+        <commons.text.version>1.9</commons.text.version>
 
         <!-- used in the EXPath Package Descriptor -->
         <package-name>https://exist-db.org/commons-text/lib</package-name>
@@ -62,6 +63,12 @@
             <groupId>org.exist-db</groupId>
             <artifactId>exist-core</artifactId>
             <version>${exist.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons.text.version}</version>
         </dependency>
 
         <!-- test dependencies -->
