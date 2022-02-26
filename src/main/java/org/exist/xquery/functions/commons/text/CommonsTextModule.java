@@ -36,12 +36,20 @@ public class CommonsTextModule extends AbstractInternalModule {
 
     public static final String NAMESPACE_URI = "https://exist-db.org/commons-text/lib";
     public static final String PREFIX = "text";
-    public static final String RELEASED_IN_VERSION = "eXist-5.2.0";
+    public static final String RELEASED_IN_VERSION = "eXist-6.0.0";
 
     // register the functions of the module
     public static final FunctionDef[] functions = functionDefs(
         FunctionDSL.functionDefs(CommonsTextFunctions.class,
-                CommonsTextFunctions.FS_COSINE_SIMILARITY
+                CommonsTextFunctions.FS_COSINE_SIMILARITY,
+                CommonsTextFunctions.FS_COSINE_DISTANCE,
+                CommonsTextFunctions.FS_HAMMING_DISTANCE,
+                CommonsTextFunctions.FS_JACCARD_SIMILARITY,
+                CommonsTextFunctions.FS_JACCARD_DISTANCE,
+                CommonsTextFunctions.FS_JARO_WINKLER_SIMILARITY,
+                CommonsTextFunctions.FS_JARO_WINKLER_DISTANCE,
+                CommonsTextFunctions.FS_LONGEST_COMMON_SUBSEQUENCE,
+                CommonsTextFunctions.FS_LONGEST_COMMON_SUBSEQUENCE_DISTANCE
         )
     );
 
