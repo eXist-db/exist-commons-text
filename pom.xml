@@ -13,7 +13,7 @@
 
     <groupId>org.exist-db</groupId>
     <artifactId>commons-text-functions</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 
     <name>Apache Commons Text Functions</name>
     <description>This is a library function module for eXist-db that wraps the specifically finding the similarities and distances between strings</description>
@@ -54,7 +54,7 @@
         <!-- used in the EXPath Package Descriptor -->
         <package-name>https://exist-db.org/commons-text/lib</package-name>
 
-        <example.module.namespace>https://exist-db.org/commons-text/lib</example.module.namespace>
+        <example.module.namespace>https://exist-db.org/xquery/commons-text</example.module.namespace>
         <example.module.java.classname>CommonsTextModule</example.module.java.classname>
     </properties>
 

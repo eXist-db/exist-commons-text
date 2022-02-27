@@ -34,24 +34,23 @@ import static org.exist.xquery.FunctionDSL.functionDefs;
  */
 public class CommonsTextModule extends AbstractInternalModule {
 
-    public static final String NAMESPACE_URI = "https://exist-db.org/commons-text/lib";
-    public static final String PREFIX = "text";
+    public static final String NAMESPACE_URI = "https://exist-db.org/xquery/commons-text";
+    public static final String PREFIX = "commons-text";
     public static final String RELEASED_IN_VERSION = "eXist-6.0.0";
 
     // register the functions of the module
-    public static final FunctionDef[] functions = functionDefs(
-        FunctionDSL.functionDefs(CommonsTextFunctions.class,
-                CommonsTextFunctions.FS_COSINE_SIMILARITY,
-                CommonsTextFunctions.FS_COSINE_DISTANCE,
-                CommonsTextFunctions.FS_HAMMING_DISTANCE,
-                CommonsTextFunctions.FS_JACCARD_SIMILARITY,
-                CommonsTextFunctions.FS_JACCARD_DISTANCE,
-                CommonsTextFunctions.FS_JARO_WINKLER_SIMILARITY,
-                CommonsTextFunctions.FS_JARO_WINKLER_DISTANCE,
-                CommonsTextFunctions.FS_LONGEST_COMMON_SUBSEQUENCE,
-                CommonsTextFunctions.FS_LONGEST_COMMON_SUBSEQUENCE_DISTANCE
-        )
-    );
+    public static final FunctionDef[] functions = {
+            new FunctionDef(CommonsTextFunctions.FNS_COSINE_SIMILARITY, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_COSINE_DISTANCE, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_HAMMING_DISTANCE, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_JACCARD_SIMILARITY, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_JACCARD_DISTANCE, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_JARO_WINKLER_SIMILARITY, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_JARO_WINKLER_DISTANCE, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_LONGEST_COMMON_SUBSEQUENCE, CommonsTextFunctions.class),
+            new FunctionDef(CommonsTextFunctions.FNS_LONGEST_COMMON_SUBSEQUENCE_DISTANCE, CommonsTextFunctions.class)
+
+    };
 
     public CommonsTextModule(final Map<String, List<? extends Object>> parameters) {
         super(functions, parameters);

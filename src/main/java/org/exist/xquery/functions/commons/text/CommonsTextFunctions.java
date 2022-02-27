@@ -19,10 +19,9 @@
 package org.exist.xquery.functions.commons.text;
 
 import org.apache.commons.text.similarity.*;
-import org.exist.xquery.BasicFunction;
-import org.exist.xquery.FunctionSignature;
-import org.exist.xquery.XPathException;
-import org.exist.xquery.XQueryContext;
+
+import org.exist.dom.QName;
+import org.exist.xquery.*;
 import org.exist.xquery.value.*;
 
 import java.util.Arrays;
@@ -39,85 +38,104 @@ import static org.exist.xquery.functions.commons.text.CommonsTextModule.function
 public class CommonsTextFunctions extends BasicFunction {
 
     private static final String COSINE_SIMILARITY = "cosine-similarity";
-    static final FunctionSignature FS_COSINE_SIMILARITY = functionSignature(
-            COSINE_SIMILARITY,
+
+    public final static FunctionSignature FNS_COSINE_SIMILARITY = new FunctionSignature(
+            new QName(COSINE_SIMILARITY, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the cosine similarity between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right"),
-            optParam("delimiter", Type.STRING, "The optional text delimiter.  The default is a space.")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string"),
+                    new FunctionParameterSequenceType("delimiter", Type.STRING, Cardinality.ZERO_OR_ONE, "The delimiter between the words")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the similarity score")
     );
 
     private static final String COSINE_DISTANCE = "cosine-distance";
-    static final FunctionSignature FS_COSINE_DISTANCE = functionSignature(
-            COSINE_DISTANCE,
+    public final static FunctionSignature FNS_COSINE_DISTANCE = new FunctionSignature(
+            new QName(COSINE_DISTANCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the cosine distance between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the distance score")
     );
 
     private static final String HAMMING_DISTANCE = "hamming-distance";
-    static final FunctionSignature FS_HAMMING_DISTANCE = functionSignature(
-            HAMMING_DISTANCE,
+    public final static FunctionSignature FNS_HAMMING_DISTANCE = new FunctionSignature(
+            new QName(HAMMING_DISTANCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the hamming distance between two strings.",
-            returns(Type.INTEGER),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.INTEGER, Cardinality.EXACTLY_ONE, "the distance score")
     );
 
     private static final String JACCARD_SIMILARITY = "jaccard-similarity";
-    static final FunctionSignature FS_JACCARD_SIMILARITY = functionSignature(
-            JACCARD_SIMILARITY,
+    public final static FunctionSignature FNS_JACCARD_SIMILARITY = new FunctionSignature(
+            new QName(JACCARD_SIMILARITY, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the Jaccard similarity between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the similarity score")
     );
 
     private static final String JACCARD_DISTANCE = "jaccard-distance";
-    static final FunctionSignature FS_JACCARD_DISTANCE = functionSignature(
-            JACCARD_DISTANCE,
+    public final static FunctionSignature FNS_JACCARD_DISTANCE = new FunctionSignature(
+            new QName(JACCARD_DISTANCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the Jaccard distance between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the distance score")
     );
 
     private static final String JARO_WINKLER_SIMILARITY = "jaro-winkler-similarity";
-    static final FunctionSignature FS_JARO_WINKLER_SIMILARITY = functionSignature(
-            JARO_WINKLER_SIMILARITY,
+    public final static FunctionSignature FNS_JARO_WINKLER_SIMILARITY = new FunctionSignature(
+            new QName(JARO_WINKLER_SIMILARITY, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the Jaro Winkler similarity between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the similarity score")
     );
 
     private static final String JARO_WINKLER_DISTANCE = "jaro-winkler-distance";
-    static final FunctionSignature FS_JARO_WINKLER_DISTANCE = functionSignature(
-            JARO_WINKLER_DISTANCE,
+    public final static FunctionSignature FNS_JARO_WINKLER_DISTANCE = new FunctionSignature(
+            new QName(JARO_WINKLER_DISTANCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the Jaro Winkler distance between two strings.",
-            returns(Type.DOUBLE),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.DOUBLE, Cardinality.EXACTLY_ONE, "the distance score")
     );
 
     private static final String LONGEST_COMMON_SUBSEQUENCE = "longest-common-subsequence";
-    static final FunctionSignature FS_LONGEST_COMMON_SUBSEQUENCE = functionSignature(
-            LONGEST_COMMON_SUBSEQUENCE,
+    public final static FunctionSignature FNS_LONGEST_COMMON_SUBSEQUENCE = new FunctionSignature(
+            new QName(LONGEST_COMMON_SUBSEQUENCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the longest common subsequence between two strings.",
-            returns(Type.INTEGER),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.INTEGER, Cardinality.EXACTLY_ONE, "the longest common subsequence")
     );
 
     private static final String LONGEST_COMMON_SUBSEQUENCE_DISTANCE = "longest-common-subsequence-distance";
-    static final FunctionSignature FS_LONGEST_COMMON_SUBSEQUENCE_DISTANCE = functionSignature(
-            LONGEST_COMMON_SUBSEQUENCE_DISTANCE,
+    public final static FunctionSignature FNS_LONGEST_COMMON_SUBSEQUENCE_DISTANCE = new FunctionSignature(
+            new QName(LONGEST_COMMON_SUBSEQUENCE_DISTANCE, CommonsTextModule.NAMESPACE_URI, CommonsTextModule.PREFIX),
             "Measures the longest common subsequence distance between two strings.",
-            returns(Type.INTEGER),
-            param("left", Type.STRING, "Left"),
-            param("right", Type.STRING, "Right")
+            new SequenceType[]{
+                    new FunctionParameterSequenceType("left", Type.STRING, Cardinality.EXACTLY_ONE, "The left string"),
+                    new FunctionParameterSequenceType("right", Type.STRING, Cardinality.EXACTLY_ONE, "The right string")
+            },
+            new FunctionReturnSequenceType(Type.INTEGER, Cardinality.EXACTLY_ONE, "the longest common subsequence distance")
     );
 
     public CommonsTextFunctions(final XQueryContext context, final FunctionSignature signature) {
