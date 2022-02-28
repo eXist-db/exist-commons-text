@@ -2,9 +2,9 @@
 <package xmlns="http://expath.org/ns/pkg" name="${package-name}" abbrev="${package-abbrev}" version="${project.version}"
     spec="1.0">
     <title>${package-title}</title>
-    <author id="my-organisation">My Organisation</author>
-    <website>${project.url}</website>
-    <license>GNU Lesser General Public License, version 2.1</license>
+    <author id="eXist-db">eXist-db</author>
+    <description>${project.description}</description>
+    <license>Apache License, version 2.0</license>
     <copyright>true</copyright>
 
     <!-- should be either "application" or "library" -->
