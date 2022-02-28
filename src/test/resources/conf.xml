@@ -746,7 +746,7 @@
             raise-error-on-failed-retrieval="no">
 
         <builtin-modules>
-            <module uri="https://exist-db.org/commons-text/lib" class="org.exist.xquery.functions.commons.text.CommonsTextModule"/>
+            <module uri="http://exist-db.org/xquery/commons-text" class="org.exist.xquery.functions.commons.text.CommonsTextModule"/>
         </builtin-modules>
     </xquery>
 
