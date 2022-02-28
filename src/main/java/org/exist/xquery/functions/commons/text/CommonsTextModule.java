@@ -34,7 +34,7 @@ import static org.exist.xquery.FunctionDSL.functionDefs;
  */
 public class CommonsTextModule extends AbstractInternalModule {
 
-    public static final String NAMESPACE_URI = "https://exist-db.org/xquery/commons-text";
+    public static final String NAMESPACE_URI = "http://exist-db.org/xquery/commons-text";
     public static final String PREFIX = "commons-text";
     public static final String RELEASED_IN_VERSION = "eXist-6.0.0";
 
