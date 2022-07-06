@@ -1,6 +1,6 @@
 # Apache Commons Text functions for eXist-db
 
-This is a library function module for eXist-db that wraps the specifically finding the similarities and distances between strings.
+This is a library function module for eXist-db that wraps the Apache Commons Text library for finding similarities and distances between strings.
 
 From the function documentation:
 
