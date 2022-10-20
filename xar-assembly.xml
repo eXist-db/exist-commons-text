@@ -50,7 +50,7 @@
         <dependencySet>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>${commons.text.version}</version>
+            <version>${project.version}</version>
         </dependencySet>
     </dependencySets>
 
