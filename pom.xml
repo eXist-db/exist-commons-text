@@ -13,7 +13,7 @@
 
     <groupId>org.exist-db</groupId>
     <artifactId>commons-text-functions</artifactId>
-    <version>1.11.0</version>
+    <version>1.12.0</version>
 
     <name>Apache Commons Text Functions</name>
     <description>This is a library function module for eXist-db that wraps the specifically finding the similarities and distances between strings</description>
